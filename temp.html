@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="copyright" content="Copyright (c) {date('Y')} Mailchimp. All Rights Reserved." />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <title>404: Page Not Found | Mailchimp</title>
+    <!--Favicons-->
+    <meta content='//mailchimp.com/browserconfig.xml' name='msapplication-config'>
+    <meta content='#FFE01B' name='msapplication-TileColor'>
+    <link href="https://cdn-images.mailchimp.com/favicons/apple-touch-icon.png" rel="apple-touch-icon" sizes="180x180">
+    <link href="https://cdn-images.mailchimp.com/favicons/touch-icon-192.png" rel="icon" sizes="192x192">
+    <link rel="shortcut icon" href="https://cdn-images.mailchimp.com/favicons/favicon.ico" />
+    <link rel="mask-icon" href="https://cdn-images.mailchimp.com/favicons/mask-icon.svg" color="#241C15">
+    <style type="text/css">
+        /* Duplicating CSS classes since this page can not load application.less */
+        * { -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box; margin: 0;padding: 0;border: 0; font-weight: inherit;}
+        html {font-size: 62.5%;}
+        body {color: #241c15;font-family: "Helvetica Neue", Helvetica, Arial, Verdana, sans-serif;-webkit-font-smoothing: antialiased;-moz-osx-font-smoothing: grayscale;font-size: 1.6rem;line-height: 1.5;text-rendering: optimizelegibility;vertical-align: baseline;}
+        .centered{float: none; margin-left: auto; margin-right: auto;}
+        .line {overflow: auto; padding-top: 30px; text-align: center;}
+        .size1of1 {width: 100%;}
+        .lastUnit { background-clip: padding-box !important; float: none; overflow: hidden; padding-left: 15px; padding-right: 15px; width: auto }
+        .below36 {margin-bottom: 2.25em !important;}
+        h1 {font-size: 4.4rem; font-family: Georgia, Times, "Times New Roman", serif; line-height: 1.1em; margin-bottom: 6px; text-align: center;}
+        p {font-size: 1.6rem; margin-bottom: 12px; text-align: center;}
+        /* END OF Duplicating CSS classes since this page can not load application.less */
+        .error-page{ max-width: 390px;}
+    </style>
+</head>
+<body class="error-page centered">
+
+    <!-- 404 image -->
+    <div class="line">
+        <img id="404image" src="https://cdn-images.mailchimp.com/error-pages/art-hero-404.png" alt="404 image" width="320" onerror="this.onerror=null; this.src='https://cdn-images.mailchimp.com/error-pages/art-hero-404.png'"/>
+    </div>
+
+    <!-- 404 Message -->
+    <div class="line below36">
+        <div class="lastUnit size1of1">
+            <h1>That's odd</h1>
+            <p>This page appears to be missing.</p>
+            <p id="pet404" style="display: none">In the meantime, here is a picture of <span id="petName"></span></p>
+        </div>
+    </div>
+
+    <!-- native bridge - for Android native wrapper trigger requestError method -->
+    <script type="text/javascript">
+        if (window.Android && window.Android.requestError) {
+            window.Android.requestError();
+        }
+
+        var images = [
+            "/images/mailchimp-pet/Oscar.png",
+            "/images/mailchimp-pet/Willie.png",
+            "/images/mailchimp-pet/Beesly.png",
+            "/images/mailchimp-pet/Bentleigh.png",
+            "/images/mailchimp-pet/Bosco.png",
+            "/images/mailchimp-pet/Bruno.png",
+            "/images/mailchimp-pet/Cleo.png",
+            "/images/mailchimp-pet/Charley.png",
+            "/images/mailchimp-pet/Charlie.png",
+            "/images/mailchimp-pet/Copper.png",
+            "/images/mailchimp-pet/Dansby.png",
+            "/images/mailchimp-pet/Dottie.png",
+            "/images/mailchimp-pet/Freya.png",
+            "/images/mailchimp-pet/Goblin.png",
+            "/images/mailchimp-pet/Hendrix.png",
+            "/images/mailchimp-pet/Howly.png",
+            "/images/mailchimp-pet/Kanga.png",
+            "/images/mailchimp-pet/Kevin.png",
+            "/images/mailchimp-pet/Link.png",
+            "/images/mailchimp-pet/Dirty.png",
+            "/images/mailchimp-pet/Liz.png",
+            "/images/mailchimp-pet/Maxine.png",
+            "/images/mailchimp-pet/Mousse.png",
+            "/images/mailchimp-pet/Nikitas.png",
+            "/images/mailchimp-pet/Pheebs.png",
+            "/images/mailchimp-pet/Pippin.png",
+            "/images/mailchimp-pet/Pogi.png",
+            "/images/mailchimp-pet/Pooka.png",
+            "/images/mailchimp-pet/Popeye.png",
+            "/images/mailchimp-pet/Remington.png",
+            "/images/mailchimp-pet/Rey.png",
+            "/images/mailchimp-pet/Riley.png",
+            "/images/mailchimp-pet/Roux.png",
+            "/images/mailchimp-pet/Ruby.png",
+            "/images/mailchimp-pet/Taco.png",
+            "/images/mailchimp-pet/Troy.png",
+            "/images/mailchimp-pet/Zelda.png",
+        ];
+
+
+        function onImageClick(event) {
+            var imagePath = this.src;
+            var relativePath = imagePath.substring(imagePath.indexOf("/images/mailchimp-pet"));
+            var currentIndex = images.indexOf(relativePath);
+            var nextIndex = currentIndex < images.length - 1 ? currentIndex + 1 : 0;
+            var nextImage = images[nextIndex];
+            var nextTitle = nextImage.substring(
+                nextImage.lastIndexOf("/") + 1,
+                nextImage.lastIndexOf(".")
+            );
+
+            if (document.getElementById("pet404").style.display === "none") {
+                document.getElementById("pet404").style.display = "";
+            }
+            document.getElementById("petName").innerText = nextTitle;
+
+            this.alt = "A pet named " + nextTitle;
+            this.src = nextImage;
+        }
+
+        document
+            .getElementById("404image")
+            .addEventListener("click", onImageClick, false);
+
+    </script>
+    <!-- /native bridge -->
+</body>
+</html>
