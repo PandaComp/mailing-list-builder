@@ -3,7 +3,7 @@ const app = express()
 const bodyParser = require('body-parser')
 const request = require('request')
 const https = require('https')
-// import api, { aud_id } from './creds'
+import api, { aud_id } from './creds'
 // const creds = require("./creds")
 // const api = creds.api
 // const aud_id = creds.aud_id
@@ -76,7 +76,9 @@ app.post('/', (req, res)=> { // respond to a post request from the form
     request.end()
 }) 
 
-app.listen(3000, (req, res) =>{
+app.listen(process.env.PORT || 3000, (req, res) =>{
     console.log(`listening on port 3000`)
 })
+
+// still tracked?
 
