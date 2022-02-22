@@ -3,12 +3,12 @@ const app = express()
 const bodyParser = require('body-parser')
 const request = require('request')
 const https = require('https')
-import api, { aud_id } from './creds'
-// const creds = require("./creds")
-// const api = creds.api
-// const aud_id = creds.aud_id
+// import api from './creds.js'
+ const creds = require("./creds.env")
+ const api = creds.api
+const aud_id = creds.aud_id
 
-
+console.log(`${api} & ${aud_id}`)
 app.use(express.static("public")) // inside my html file, I can just refer to the file relative to "public" folder.
 app.use(bodyParser.urlencoded({extended:true})) // now you'll be able to access req.body with app.post
 
